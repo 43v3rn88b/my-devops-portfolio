@@ -3,7 +3,13 @@
 #
 #ENTRYPOINT ["top", "-b"]
 # Use a lightweight Python base image
-FROM python:3.9-slim
+#FROM python:3.9-slim
+
+# Change from python:3.9-slim to python:3.9-alpine
+FROM python:3.9-alpine
+
+# Alpine requires some extra build steps for certain packages
+RUN apk add --no-cache gcc musl-dev linux-headers
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -19,4 +25,5 @@ COPY . .
 EXPOSE 5000
 
 # Command to run the application
+
 CMD ["python", "app.py"]
