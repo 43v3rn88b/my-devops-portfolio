@@ -12,7 +12,8 @@ def test_home_route(client):
     """Test the Root Endpoint returns 200 and correct JSON"""
     response = client.get('/')
     # Change 200 to 500 (Simulating a server error expectation)
-    assert response.status_code == 500
+    #assert response.status_code == 500
+    assert response.status_code == 200
     assert b"DevSecOps" in response.data
 
 def test_health_route(client):
@@ -21,3 +22,4 @@ def test_health_route(client):
     assert response.status_code == 200
 
     assert response.json['status'] == 'up'
+
