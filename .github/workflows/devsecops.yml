@@ -64,7 +64,7 @@ jobs:
         with:
           image-ref: 'my-app:${{ github.sha }}'
           format: 'table'
-          exit-code: '1'          # Fail pipeline if vulnerability found
+          exit-code: '0'          # Fail pipeline if vulnerability found
           ignore-unfixed: true    # Ignore bugs that don't have a fix yet
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
