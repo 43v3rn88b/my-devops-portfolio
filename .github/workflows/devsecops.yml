@@ -47,6 +47,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Built-in GitHub secret
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=my-devops-portfolio
+            -Dsonar.organization=43v3rn88b
 
       # --- BUILD STAGE ---
       # Build the container image only if previous scans passed
