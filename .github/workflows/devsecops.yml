@@ -49,7 +49,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=my-devops-portfolio
+            -Dsonar.projectKey=43v3rn88b_my-devops-portfolio
             -Dsonar.organization=43v3rn88b
 
       # --- BUILD STAGE ---
