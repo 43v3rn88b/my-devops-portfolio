@@ -69,6 +69,23 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
+      - name: Start Container for Testing
+        # We use the same image name Trivy scanned 
+        run: |
+          docker run -d -p 5000:5000 --name devops-app my-app:${{ github.sha }}
+          # IMPORTANT: Give the app 5 seconds to boot up before k6 hits it
+          sleep 5 
+
+      - name: Run k6 Load Test
+        uses: grafana/k6-action@v0.3.1
+        with:
+          filename: load-test.js
+
+      - name: Stop and Clean Up
+        if: always() # Run this even if the load test fails
+        run: docker stop devops-app && docker rm devops-app
+
+
       # --- FINAL STAGE: LOGIN & PUSH ---
       # Only runs if the image is secure. Pushes to Docker Hub.
       - name: Login to Docker Hub
