@@ -6,7 +6,16 @@ import { sleep, check } from 'k6';
 export const options = {
   thresholds: {
     http_req_duration: ['p(95)<500'],
+
+    // 2. SUCCESS GATE (Add this!): 
+    // This tells k6: "Fail the pipeline if more than 1% of checks fail"
+    'checks': ['rate>0.99'], 
+
+    // 3. Error Gate: Fail if the request fails completely
+    'http_req_failed': ['rate<0.01'], 
   },
+  vus: 5,
+  duration: '10s',
 };
 
 export default function () {
@@ -21,4 +30,5 @@ export default function () {
 
   // 3. Pause for 1 second between requests (simulating real user behavior)
   sleep(1);
+
 }
