@@ -80,6 +80,8 @@ jobs:
         uses: grafana/k6-action@v0.3.1
         with:
           filename: load-test.js
+        # Add the --quiet flag to stop request-level logging
+          flags: --quiet --log-output=none
 
       - name: Stop and Clean Up
         if: always() # Run this even if the load test fails
