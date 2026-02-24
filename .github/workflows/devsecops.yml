@@ -76,6 +76,9 @@ jobs:
           # IMPORTANT: Give the app 5 seconds to boot up before k6 hits it
           sleep 5 
 
+      - name: Run Python Unit Tests
+        run: pytest test_app.py
+
       - name: Run k6 Load Test
         uses: grafana/k6-action@v0.3.1
         with:
