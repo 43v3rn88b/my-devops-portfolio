@@ -20,7 +20,7 @@ export const options = {
 
 export default function () {
   // 1. Send a request to the containerized app (running on localhost in the CI runner)
-  const res = http.get('http://localhost:5000/');
+  const res = http.get('http://172.17.0.1:5000/resume');
 
   // 2. Validate the response
   check(res, {
@@ -32,3 +32,4 @@ export default function () {
   sleep(1);
 
 }
+
