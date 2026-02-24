@@ -22,6 +22,9 @@ export default function () {
   // 1. Send a request to the containerized app (running on localhost in the CI runner)
   const res = http.get('http://172.17.0.1:5000/resume');
 
+  // ADD THIS LINE: It will print the exact error your app is returning!
+  console.log(`Status: ${res.status} | Body: ${res.body}`);
+
   // 2. Validate the response
   check(res, {
     'is status 200': (r) => r.status === 200,
@@ -32,4 +35,5 @@ export default function () {
   sleep(1);
 
 }
+
 
