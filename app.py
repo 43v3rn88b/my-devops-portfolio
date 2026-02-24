@@ -3,6 +3,13 @@ import time # Add this import
 
 app = Flask(__name__)
 
+@app.route('/resume')
+def resume():
+    import time
+    # This is the trap! It makes the test wait 2 seconds.
+    time.sleep(2) 
+    return '{"message": "Welcome to my DevSecOps Resume API"}'
+
 @app.route('/')
 def home():
     time.sleep(2) # Sleep for 2 seconds (2000ms)
@@ -17,3 +24,4 @@ if __name__ == '__main__':
     # Listens on all interfaces (0.0.0.0) so Docker can expose it
 
     app.run(host='0.0.0.0', port=5000)
+
