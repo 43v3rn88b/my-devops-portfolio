@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-resume-api
+spec:
+  replicas: 2  # This creates 2 copies of your app for high availability
+  selector:
+    matchLabels:
+      app: resume-api
+  template:
+    metadata:
+      labels:
+        app: resume-api
+    spec:
+      containers:
+      - name: resume-app
+        image: my-app:latest # Minikube will look for this image
+        imagePullPolicy: Never # Tells K8s to use the local image we built
+        ports:
+        - containerPort: 5000
