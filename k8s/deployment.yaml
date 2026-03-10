@@ -11,10 +11,14 @@ spec:
     metadata:
       labels:
         app: resume-api
+      annotations:                # <-- Add this block
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5000"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: resume-app
-        image: my-app:latest # Minikube will look for this image
+        image: my-app:v3 # Minikube will look for this image
         imagePullPolicy: Never # Tells K8s to use the local image we built
         ports:
         - containerPort: 5000

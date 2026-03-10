@@ -1,0 +1,35 @@
+name: DevSecOps CI Pipeline
+
+# When should this robot wake up?
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# What should the robot do?
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # A fresh, temporary cloud server
+
+    steps:
+    # 1. Download our code into the server
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 2. Install Python
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9'
+
+    # 3. Test that our requirements aren't broken
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. Do a "Dry Run" Docker Build to ensure the Dockerfile is valid
+    - name: Test Docker Build
+      run: |
+        docker build -t my-app:ci-test .

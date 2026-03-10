@@ -1,7 +1,13 @@
 from flask import Flask, jsonify
 import time # Add this import
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+# Set up Prometheus metrics
+
+metrics = PrometheusMetrics(app)
+# Optional: Add static information to your metrics
+metrics.info('app_info', 'Application info', version='1.0.0')
 
 @app.route('/resume')
 def resume():
