@@ -8,6 +8,6 @@ spec:
     app: resume-api
   ports:
     - protocol: TCP
-      port: 80       # Port the service listens on
+      port: 80       # Port the service listens on.
       targetPort: 5000 # Port your Flask app listens on
       nodePort: 30001 # The fixed port we can visit in the browser
